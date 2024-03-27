@@ -1,0 +1,29 @@
+# Restart simulation. This command will append results of new simulations to the same output files, e.g. COLVAR.
+# test CuMD simulation with asymmetry
+#RESTART
+
+GROUP ATOMS=3-3648:8,3649-9510:3 LABEL=all
+GROUP ATOMS=3-3648:8 LABEL=urea        #all urea atoms
+GROUP ATOMS=3649-9510:3 LABEL=water   #all water atoms
+
+# MONITORING THE SOLUTE (urea) CR DENSITY:
+NSHELL LABEL=n_water GROUP=water NSV=1 DCR=0.0821 CRSIZE=0.1642 DF=0.2602 WF=0.0273 WOUT=0.0035 WIN=0.0035 NINT=5.0 NZ=188
+NSHELL LABEL=n_urea GROUP=all NSV=1 SOLUTE=464 NST=1 DCR=0.0821 CRSIZE=0.1642 DF=0.2602 WF=0.0273 WOUT=0.0035 WIN=0.0035 NINT=5.0 NZ=188
+
+# Here comes the asymmetry, 'l' and 'r' indicate left and right, respectively
+# # # -1 is for left and 1 for right side of the slab.
+NSHELL LABEL=n_water_l GROUP=water NSV=1 DCR=0.0821 CRSIZE=0.1642 DF=0.2602 WF=0.0273 WOUT=0.0035 WIN=0.0035 NINT=5.0 NZ=188 ASYMM=-1
+NSHELL LABEL=n_water_r GROUP=water NSV=1 DCR=0.0821 CRSIZE=0.1642 DF=0.2602 WF=0.0273 WOUT=0.0035 WIN=0.0035 NINT=5.0 NZ=188 ASYMM=1
+
+NSHELL LABEL=n_urea_l GROUP=all NSV=1 SOLUTE=456 NST=1 DCR=0.0821 CRSIZE=0.1642 DF=0.2602 WF=0.0273 WOUT=0.0035 WIN=0.0035 NINT=5.0 NZ=188 ASYMM=-1
+NSHELL LABEL=n_urea_r GROUP=all NSV=1 SOLUTE=456 NST=1 DCR=0.0821 CRSIZE=0.1642 DF=0.2602 WF=0.0273 WOUT=0.0035 WIN=0.0035 NINT=5.0 NZ=188 ASYMM=1
+
+# # Concentration gradient applied to 'b' particles
+NSHELL LABEL=durea GROUP=all NSV=1 NST=1 SOLUTE=456 DCR=0.0821 CRSIZE=0.1642 DF=0.2602 WF=0.0273 WOUT=0.0035 WIN=0.0035 NINT=5.0 NZ=188 DELTA
+
+# # # RESTRAINING THE SOLUTE/SOLVENT CR DENSITY:
+RESTRAINT ARG=n_urea_l AT=5.465 KAPPA=10000.0 LABEL=ureasl      #urea density restrain
+RESTRAINT ARG=n_urea_r AT=5.465 KAPPA=10000.0 LABEL=ureasr      #urea density restrain
+
+# Print value of the CV and bias to a file named COLVAR
+PRINT STRIDE=500 ARG=* FILE=COLVAR  
