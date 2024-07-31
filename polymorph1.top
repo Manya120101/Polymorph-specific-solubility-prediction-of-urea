@@ -1,0 +1,15 @@
+#include "./amber03.ff/forcefield.itp"
+
+; additional params for the molecule
+#include "./urea_GMX.itp"
+
+#include "./amber03.ff/tip3p.itp"
+
+[ system ]
+; Name
+urea
+
+[ molecules ]
+; Compound                #mols
+LIG  456
+SOL  1954

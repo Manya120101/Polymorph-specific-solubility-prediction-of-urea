@@ -1,0 +1,15 @@
+#include "forcefield.itp"
+
+; additional params for the molecule
+#include "./urea_GMX.itp"
+
+#include "tip3p.itp"
+
+[ system ]
+; Name
+urea
+
+[ molecules ]
+; Compound                #mols
+LIG  784
+SOL  2198
