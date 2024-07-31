@@ -1,0 +1,79 @@
+; urea.pdb.mol2_GMX.itp created by acpype (v: 2022.7.21) on Tue Oct 17 10:11:40 2023
+
+[ atomtypes ]
+;name   bond_type     mass     charge   ptype   sigma         epsilon       Amb
+ hn       hn          0.00000  0.00000   A     1.06908e-01   6.56888e-02 ; 0.60  0.0157
+ c        c           0.00000  0.00000   A     3.39967e-01   3.59824e-01 ; 1.91  0.0860
+ o        o           0.00000  0.00000   A     2.95992e-01   8.78640e-01 ; 1.66  0.2100
+ n        n           0.00000  0.00000   A     3.25000e-01   7.11280e-01 ; 1.82  0.1700
+
+[ moleculetype ]
+;name            nrexcl
+LIG    3
+
+[ atoms ]
+;   nr  type  resi  res  atom  cgnr     charge      mass       ; qtot   bond_type
+     1   hn     1   LIG     H    1     0.299000      1.00800 ; qtot 0.299
+     2    c     1   LIG     C    2     0.727100     12.01000 ; qtot 1.026
+     3    o     1   LIG     O    3    -0.639100     16.00000 ; qtot 0.387
+     4    n     1   LIG     N    4    -0.642000     14.01000 ; qtot -0.255
+     5   hn     1   LIG    H1    5     0.299000      1.00800 ; qtot 0.044
+     6   hn     1   LIG    H2    6     0.299000      1.00800 ; qtot 0.343
+     7    n     1   LIG    N1    7    -0.642000     14.01000 ; qtot -0.299
+     8   hn     1   LIG    H3    8     0.299000      1.00800 ; qtot 0.000
+
+[ bonds ]
+;   ai     aj funct   r             k
+     1      4   1    1.0129e-01    3.3740e+05 ;      H - N     
+     2      3   1    1.2183e-01    5.3363e+05 ;      C - O     
+     2      4   1    1.3789e-01    3.5782e+05 ;      C - N     
+     2      7   1    1.3789e-01    3.5782e+05 ;      C - N1    
+     4      5   1    1.0129e-01    3.3740e+05 ;      N - H1    
+     6      7   1    1.0129e-01    3.3740e+05 ;     H2 - N1    
+     7      8   1    1.0129e-01    3.3740e+05 ;     N1 - H3    
+
+[ pairs ]
+;   ai     aj    funct
+     1      3      1 ;      H - O     
+     1      7      1 ;      H - N1    
+     3      5      1 ;      O - H1    
+     3      6      1 ;      O - H2    
+     3      8      1 ;      O - H3    
+     4      6      1 ;      N - H2    
+     4      8      1 ;      N - H3    
+     5      7      1 ;     H1 - N1    
+
+[ angles ]
+;   ai     aj     ak    funct   theta         cth
+     1      4      2      1    1.1755e+02    4.0417e+02 ;      H - N      - C     
+     1      4      5      1    1.1795e+02    3.3137e+02 ;      H - N      - H1    
+     2      4      5      1    1.1755e+02    4.0417e+02 ;      C - N      - H1    
+     2      7      6      1    1.1755e+02    4.0417e+02 ;      C - N1     - H2    
+     2      7      8      1    1.1755e+02    4.0417e+02 ;      C - N1     - H3    
+     3      2      4      1    1.2305e+02    6.2091e+02 ;      O - C      - N     
+     3      2      7      1    1.2305e+02    6.2091e+02 ;      O - C      - N1    
+     4      2      7      1    1.1356e+02    6.1003e+02 ;      N - C      - N1    
+     6      7      8      1    1.1795e+02    3.3137e+02 ;     H2 - N1     - H3    
+
+[ dihedrals ] ; propers
+; for gromacs 4.5 or higher, using funct 9
+;    i      j      k      l   func   phase     kd      pn
+     1      4      2      3      9     0.00   8.36800   1 ;      H-     N-     C-     O
+     1      4      2      3      9   180.00  10.46000   2 ;      H-     N-     C-     O
+     1      4      2      7      9   180.00  10.46000   2 ;      H-     N-     C-    N1
+     3      2      4      5      9     0.00   8.36800   1 ;      O-     C-     N-    H1
+     3      2      4      5      9   180.00  10.46000   2 ;      O-     C-     N-    H1
+     3      2      7      6      9     0.00   8.36800   1 ;      O-     C-    N1-    H2
+     3      2      7      6      9   180.00  10.46000   2 ;      O-     C-    N1-    H2
+     3      2      7      8      9     0.00   8.36800   1 ;      O-     C-    N1-    H3
+     3      2      7      8      9   180.00  10.46000   2 ;      O-     C-    N1-    H3
+     4      2      7      6      9   180.00  10.46000   2 ;      N-     C-    N1-    H2
+     4      2      7      8      9   180.00  10.46000   2 ;      N-     C-    N1-    H3
+     5      4      2      7      9   180.00  10.46000   2 ;     H1-     N-     C-    N1
+
+[ dihedrals ] ; impropers
+; treated as propers in GROMACS to use correct AMBER analytical function
+;    i      j      k      l   func   phase     kd      pn
+     2      1      4      5      4   180.00   4.60240   2 ;      C-     H-     N-    H1
+     2      6      7      8      4   180.00   4.60240   2 ;      C-    H2-    N1-    H3
+     4      7      2      3      4   180.00  43.93200   2 ;      N-    N1-     C-     O
